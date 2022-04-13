@@ -49,11 +49,13 @@ function userInput(){
 }
 
 function formater(){
-    data = `
-    # ${answers[0]} 
+    data = 
+    `# ${answers[0]} 
     \n newline hopefully ${answers[1]} 
     \n ## Usage 
-    \n \`\`\`javascript ${answers[2]} \`\`\`
+    \n \`\`\`bash \n 
+    ${answers[2]} \n
+    \`\`\`
     `
     console.log(data);
     fs.writeFileSync('README.md', data);

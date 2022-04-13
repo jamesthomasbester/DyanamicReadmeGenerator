@@ -1,9 +1,12 @@
-
-    # this is for testing 
+# README.md generator 
     
- newline hopefully testing file 
+ newline hopefully a small javascript script that generates readme.md base on user input (console) 
     
  ## Usage 
     
- ```javascript everyone ```
+ ```bash 
+ 
+    node script.js 
+
+    ```
     
