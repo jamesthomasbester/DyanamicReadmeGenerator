@@ -52,10 +52,9 @@ function formater(){
     data = 
     `# ${answers[0]} 
     \n newline hopefully ${answers[1]} 
-    \n ## Usage 
-    \n \`\`\`bash \n 
-    ${answers[2]} \n
-    \`\`\`
+    \n ## Usage
+    \n\`\`\`bash
+    ${answers[2]}\n\`\`\`
     `
     console.log(data);
     fs.writeFileSync('README.md', data);
