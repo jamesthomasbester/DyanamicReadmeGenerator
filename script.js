@@ -22,7 +22,7 @@ try{
     readline.question('README was already found, do you want to overwrite it? ', answer =>{
         if(answer == "yes" || "Yes" || "Y" || "y"){
             console.log("Okay overwriting README.md")
-           generateREADME()
+           userInput()
         }else if(answer == "no" || "No" || "N" || "n"){
             console.log("Okay closing console...")
             return;
@@ -31,15 +31,15 @@ try{
     })  
 }catch{
     console.log("creating README.md")
-  generateREADME()
+  userInput()
 }
 
-function generateREADME(){
+function userInput(){
     rl.question(questions[count], answer =>{
         if(count < questions.length){
             count++;
             answers.push(answer);
-            generateREADME()
+            userInput()
         }else{
             rl.close();
             console.log(answers);
@@ -49,8 +49,12 @@ function generateREADME(){
 }
 
 function formater(){
-    var data = ""
-    data = `#${answers[0]} \n newline hopefully ${answers[1]}`
+    data = `
+    # ${answers[0]} 
+    \n newline hopefully ${answers[1]} 
+    \n ## Usage 
+    \n \`\`\`javascript ${answers[2]} \`\`\`
+    `
     console.log(data);
     fs.writeFileSync('README.md', data);
 }
