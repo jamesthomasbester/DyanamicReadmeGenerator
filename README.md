@@ -1,12 +1,11 @@
-# Dynamic Readme Generator
+# dasd
         
-a javascript console that will generate a readme file based on a template and user input
+sadas
 ## Installation 
 ```bash
-        git clone https://github.com/jamesthomasbester/DyanamicReadmeGenerator.git
+        sadasd
 ```
 ## Deployment 
 ```bash
-            node script.js
+            asd
 ```
-}
