@@ -10,7 +10,8 @@ const answers =[]
 const questions = [
     'Name: ',
     'Description: ',
-    'Usage: ',
+    'Installation: ',
+    'Deployment: ',
     'Contributing: ',
     'Framework: ',
     'Prequisites: ',
@@ -49,13 +50,48 @@ function userInput(){
 }
 
 function formater(){
-    data = 
-    `# ${answers[0]} 
-    \n newline hopefully ${answers[1]} 
-    \n ## Usage
-    \n\`\`\`bash
-    ${answers[2]}\n\`\`\`
-    `
+
+    var title = (title, description, option) =>{
+        return(
+        `# ${title}
+        \n${description}\n`);
+    }
+    var demo = (demo, options) => {
+        return(`## Demo \n${demo}`)
+    }
+    var installation = (installation, option) =>{
+        return(
+        `## Installation \n\`\`\`bash
+        ${installation}\n\`\`\`\n`);
+    }
+    var runLocally = (code, options) =>{
+        return(
+            ``
+        )
+    }
+    var deployment = (deployment, options) =>{
+        return(
+            `## Deployment \n\`\`\`bash
+            ${deployment}\n\`\`\`\n}`
+        )
+    }
+    var screenshot = (path, options) => {
+        return(
+            `## Screenshots 
+        \n${path.forEach(element => {
+            return `![App Screenshot](element)\n`
+        })})`
+        )
+    }
+    var documentation = (doc, link, option) =>{
+        return(
+            `
+            `
+        )
+    }
+
+    let data = title(answers[0], answers[1]) + installation(answers[2]) + deployment(answers[3]);
+
     console.log(data);
     fs.writeFileSync('README.md', data);
 }
