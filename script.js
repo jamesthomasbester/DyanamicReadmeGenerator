@@ -143,7 +143,7 @@ const main = {
         }
         var features = (input, options) =>{
             return(
-                `## Input \n
+                `## Features \n
                 ${input} \n`
             )
         }
@@ -156,20 +156,19 @@ const main = {
         var screenshot = (path, options) => {
             return(
                 `## Screenshots 
-            \n
-                ![App Screenshot](${path})\n`
+            \n![App Screenshot](${path})\n`
             )
         }
         var documentation = (link, option) =>{
             return(
-                `## Documentation \n
-                [doc](${link})\n`
+                `## Documentation 
+                \n[doc](${link})\n`
             )
         }
         var feedback = (input) =>{
             return(
-                `## Feedback \n
-                ${input}`
+                `## Feedback 
+                \n${input}`
             )
         }
     
