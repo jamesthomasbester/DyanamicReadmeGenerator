@@ -39,11 +39,13 @@ const questions = [
     `
             |      6. Any documentation name and link split by commar: `,
     `
-            |      7. Deployment (terminal syntax used): `,
+            |      7. Any features that you want to highlight`,
     `
-            |      8. Where should any feedback be directed: `,
+            |      8. Deployment (terminal syntax used): `,
+    `
+            |      9. Where should any feedback be directed: `,
     `       
-            |      9. Any Acknowledgements name and link split by commar: `
+            |      10. Any Acknowledgements name and link split by commar: `
 ];
 
 const question = (input) =>{
@@ -139,32 +141,41 @@ const main = {
             `## Installation \n\`\`\`bash
             ${installation}\n\`\`\`\n`);
         }
-        var runLocally = (code, options) =>{
+        var features = (input, options) =>{
             return(
-                ``
+                `## Input \n
+                ${input} \n`
             )
         }
-        var deployment = (deployment, options) =>{
+        var deployment = (input, options) =>{
             return(
                 `## Deployment \n\`\`\`bash
-                ${deployment}\n\`\`\`\n`
+                ${input}\n\`\`\`\n`
             )
         }
         var screenshot = (path, options) => {
             return(
                 `## Screenshots 
-            \n${path.forEach(element => {
-                return `![App Screenshot](${element})\n`
-            })})`
+            \n
+                ![App Screenshot](${path})\n`
             )
         }
-        var documentation = (doc, link, option) =>{
+        var documentation = (link, option) =>{
             return(
-                `[${doc}](${link})`
+                `## Documentation \n
+                [doc](${link})\n`
+            )
+        }
+        var feedback = (input) =>{
+            return(
+                `## Feedback \n
+                ${input}`
             )
         }
     
-        template = title(answers[0], answers[1]) + screenshot() + installation(answers[2]) + deployment(answers[3]) + documentation();
+        template = title(format[0], format[1]) + screenshot(format[2])
+         + demo(format[3]) + installation(format[4]) + documentation(format[5]) 
+         + features(format[6]) + deployment(format[7]) +feedback(format[8]);
     
     },
     writer: (option) => {
