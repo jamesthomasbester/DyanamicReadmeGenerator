@@ -4,22 +4,22 @@ A script that will generate a README.md file for your repo's. you can use a prem
 ## Screenshots 
             
 
-                ![App Screenshot](readme.png)
-## Demo 
+![App Screenshot](readme.png)
+## Demo s
 none## Installation 
 ```bash
             npm init -y
 ```
 ## Documentation 
 
-                [doc](https://readme.so/editor)
+[doc](https://readme.so/editor)
 ## Input 
 
-                ability to choose a custom template or premade template 
+ability to choose a custom template or premade template 
 ## Deployment 
 ```bash
-                node script.js
+node script.js
 ```
 ## Feedback 
 
-                jamesthomasbester@gmail.com
+jamesthomasbester@gmail.com

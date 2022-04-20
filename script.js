@@ -143,8 +143,8 @@ const main = {
         }
         var features = (input, options) =>{
             return(
-                `## Features \n
-                ${input} \n`
+                `## Features 
+                \n${input} \n`
             )
         }
         var deployment = (input, options) =>{
