@@ -19,9 +19,11 @@ const answers = {
 
 };
 
-const temp = [
+const format = [
 
 ];
+
+var template;
 
 const questions = [
     `       
@@ -110,11 +112,12 @@ const main = {
             if(count < questions.length){
                 rl.question(questions[count], answer => {
                     count++;
-                    temp.push(answer);
+                    format.push(answer);
                     loop();
                 })
             }else{
-                main.writer()
+                main.formater();
+                main.writer(template)
             }
         }
         loop();
@@ -122,10 +125,50 @@ const main = {
     custom: () => {
 
     },
+    formater: () => {
+        var title = (title, description, option) =>{
+            return(
+            `# ${title}
+            \n${description}\n`);
+        }
+        var demo = (demo, options) => {
+            return(`## Demo \n${demo}`)
+        }
+        var installation = (installation, option) =>{
+            return(
+            `## Installation \n\`\`\`bash
+            ${installation}\n\`\`\`\n`);
+        }
+        var runLocally = (code, options) =>{
+            return(
+                ``
+            )
+        }
+        var deployment = (deployment, options) =>{
+            return(
+                `## Deployment \n\`\`\`bash
+                ${deployment}\n\`\`\`\n`
+            )
+        }
+        var screenshot = (path, options) => {
+            return(
+                `## Screenshots 
+            \n${path.forEach(element => {
+                return `![App Screenshot](${element})\n`
+            })})`
+            )
+        }
+        var documentation = (doc, link, option) =>{
+            return(
+                `[${doc}](${link})`
+            )
+        }
+    
+        template = title(answers[0], answers[1]) + screenshot() + installation(answers[2]) + deployment(answers[3]) + documentation();
+    
+    },
     writer: (option) => {
-        
-
-        fs.writeFileSync('README.md', data)
+        fs.writeFileSync('README.md', option)
     }
 
 }
@@ -183,45 +226,45 @@ main.init()
 
 // function formater(){
 
-//     var title = (title, description, option) =>{
-//         return(
-//         `# ${title}
-//         \n${description}\n`);
-//     }
-//     var demo = (demo, options) => {
-//         return(`## Demo \n${demo}`)
-//     }
-//     var installation = (installation, option) =>{
-//         return(
-//         `## Installation \n\`\`\`bash
-//         ${installation}\n\`\`\`\n`);
-//     }
-//     var runLocally = (code, options) =>{
-//         return(
-//             ``
-//         )
-//     }
-//     var deployment = (deployment, options) =>{
-//         return(
-//             `## Deployment \n\`\`\`bash
-//             ${deployment}\n\`\`\`\n`
-//         )
-//     }
-//     var screenshot = (path, options) => {
-//         return(
-//             `## Screenshots 
-//         \n${path.forEach(element => {
-//             return `![App Screenshot](${element})\n`
-//         })})`
-//         )
-//     }
-//     var documentation = (doc, link, option) =>{
-//         return(
-//             `[${doc}](${link})`
-//         )
-//     }
+    // var title = (title, description, option) =>{
+    //     return(
+    //     `# ${title}
+    //     \n${description}\n`);
+    // }
+    // var demo = (demo, options) => {
+    //     return(`## Demo \n${demo}`)
+    // }
+    // var installation = (installation, option) =>{
+    //     return(
+    //     `## Installation \n\`\`\`bash
+    //     ${installation}\n\`\`\`\n`);
+    // }
+    // var runLocally = (code, options) =>{
+    //     return(
+    //         ``
+    //     )
+    // }
+    // var deployment = (deployment, options) =>{
+    //     return(
+    //         `## Deployment \n\`\`\`bash
+    //         ${deployment}\n\`\`\`\n`
+    //     )
+    // }
+    // var screenshot = (path, options) => {
+    //     return(
+    //         `## Screenshots 
+    //     \n${path.forEach(element => {
+    //         return `![App Screenshot](${element})\n`
+    //     })})`
+    //     )
+    // }
+    // var documentation = (doc, link, option) =>{
+    //     return(
+    //         `[${doc}](${link})`
+    //     )
+    // }
 
-//     let data = title(answers[0], answers[1]) + screenshot() + installation(answers[2]) + deployment(answers[3]) + documentation();
+    // let data = title(answers[0], answers[1]) + screenshot() + installation(answers[2]) + deployment(answers[3]) + documentation();
 
 //     console.log(data);
 //     fs.writeFileSync('README.md', data);
