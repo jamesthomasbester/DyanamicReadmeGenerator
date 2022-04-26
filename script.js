@@ -1,10 +1,12 @@
 const fs = require('fs');
 const readline = require('readline');
+const inquirer = require('inquirer');
 const { writer } = require('repl');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+
 const answers = {
     title: '1',
     description: '2',
@@ -26,97 +28,122 @@ const format = [
 var template;
 
 const questions = [
-    `       
-            |      1. What is the Title of the project: `,
-    `       
-            |      2. A description of thie project: `,
-    `       
-            |      3. Path or url to a screenshot: `,
-    `       
-            |      4. Link to a live demo of the project: `,
-    `       
-            |      5. Bash command to install project: `,
-    `
-            |      6. Any documentation name and link split by commar: `,
-    `
-            |      7. Any features that you want to highlight`,
-    `
-            |      8. Deployment (terminal syntax used): `,
-    `
-            |      9. Where should any feedback be directed: `,
-    `       
-            |      10. Any Acknowledgements name and link split by commar: `
+    `What is the Title of the project: `,
+    `A description of thie project:`,
+    `Path or url to a screenshot:`,
+    `Link to a live demo of the project: `,
+    `Bash command to install project:`,
+    `Any documentation name and link split by commar:`,
+    ` Any features that you want to highlight`,
+    `Deployment (terminal syntax used):`,
+    `Where should any feedback be directed:`,
+    `Any Acknowledgements name and link split by commar:`
 ];
-
-const question = (input) =>{
-    let data;
-    rl.question(input, answer => data = answer)
-    rl.close();
-    return data;
-}
-
-console.log(Object.entries(answers))
 
 const main = {
     init: () => {
-
-        rl.question(
-            `
-            -------------------README.md Generator-------------------\n
-            |        Please select an option from the below         |\n
-            |      1. create README.md based on pre-made template   |\n
-            |      2. create your own README.md template            |\n
-            ---------------------------------------------------------\n
-            input: `,
-            answer => {
-                if(answer == '1'){
-                    main.fileCheck(1);
-                }else if( answer == '2'){
-                    main.fileCheck(2);
-                }
+        console.log('-------------------README.md Generator-------------------')
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'intro',
+                message: 'do you want to create a readme or view readme',
+                choices: ['Create README.md based on pre-made template', 'View current README.md', 'Quit']
             }
-        )
+        ])
+        .then( answer =>{
+            if(answer.intro == "Create README.md based on pre-made template"){
+                main.fileCheck(1);
+            }else if(answer.intro == "View current README.md") {
+                main.fileCheck(2);
+            }else if(answer.intro == "Quit"){
+                process.exit();
+            }else{
+                console.error('An Error occured closing terminal.');
+                process.exit();
+            }
+        })
     },
     fileCheck: (option) => {
         try{
-            fs.readFileSync('README.md', {encoding: 'utf8'});
-            rl.question(`
-            | README was already found, do you want to overwrite it? |\n
-            (yes or no): `, answer =>{
-                if(answer == "yes" || "y"){
-                    console.log(`
-            | Okay overwriting README.md`);
-                    if(option == '1'){
-                        main.premade()
-                    }else{
-                        main.custom()
+            let file = fs.readFileSync('README.md', {encoding: 'utf8'});
+            if(option == 1){
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'file',
+                        message: 'README was already found, do you want to overwrite it?',
+                        choices: ['Yes', 'No']
                     }
-                }else if(answer == "no" || "n"){
-                    console.log(`
-            | Okay closing console...`);
-                    return;  
-                }
-            })  
-        }catch{
-            console.log("creating README.md");
-            if(option == '1'){
-                console.log('premade')
-                main.premade()
-            }else{
-                console.log('custom')
-                main.custom()
+                ])
+                .then( answer =>{
+                    if(answer.file == 'Yes'){
+                        console.log('Okay overwriting README.md');
+                        main.premade();
+                    }else if(answer.file == 'No'){
+                        console.log('Okay closing terminal');
+                        process.exit();
+                    }
+                })
             }
+            else if(option == 2){
+                console.log('\x1b[32m', file, '\x1b[0m');
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'noFile',
+                        message: 'Do you want to make any changes to the README.md?',
+                        choices: ['Yes', 'No']
+                    }
+                ])
+                .then( answer =>{
+                    if(answer.noFile == 'Yes'){
+                        main.premade();
+                    }else if(answer.noFile == 'No'){
+                        console.log('Okay closing terminal')
+                        process.exit();
+                    }
+                })
+            }
+        }catch{
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'noFile',
+                    message: 'No README.md was found would you like to create one?',
+                    choices: ['Yes', 'No']
+                }
+            ])
+            .then( answer =>{
+                if(answer.noFile == 'Yes'){
+                    main.premade();
+                }else if(answer.noFile == 'No'){
+                    console.log('Okay closing terminal')
+                    process.exit();
+                }
+            })
         }
     },
     premade: () => {
         let count = 0;
         function loop() {
             if(count < questions.length){
-                rl.question(questions[count], answer => {
+                inquirer.prompt([
+                    {
+                        name: 'question',
+                        message: questions[count]
+                    }
+                ])
+                .then( answer => {
                     count++;
-                    format.push(answer);
+                    format.push(answer.question);
                     loop();
                 })
+                // rl.question(questions[count], answer => {
+                //     count++;
+                //     format.push(answer);
+                //     loop();
+                // })
             }else{
                 main.formater();
                 main.writer(template)
@@ -125,9 +152,19 @@ const main = {
         loop();
     },
     custom: () => {
-
+        console.log(`\n 
+            | listed below are the questions and the order           | `)
+        questions.forEach(element =>{
+            console.log(` 
+            ${element.trim()}`)
+        })
+        rl.question(`
+            | Return the order that you want the README.md           |
+            | (e.g: 1,2,5,7,3,4) leave out numbers you dont want     |\n`, answer =>{
+                formater(answer.split(','));
+            })
     },
-    formater: () => {
+    formater: (order) => {
         var title = (title, description, option) =>{
             return(
             `# ${title}
@@ -171,112 +208,15 @@ const main = {
                 \n${input}`
             )
         }
-    
         template = title(format[0], format[1]) + screenshot(format[2])
          + demo(format[3]) + installation(format[4]) + documentation(format[5]) 
-         + features(format[6]) + deployment(format[7]) +feedback(format[8]);
-    
+         + features(format[6]) + deployment(format[7]) + feedback(format[8]);
+         main.writer(template);
     },
     writer: (option) => {
-        fs.writeFileSync('README.md', option)
+        console.log(option)
+        fs.writeFileSync('README.md', option);
     }
-
 }
 
 main.init()
-
-
-
-
-
-
-// try{
-//     fs.readFileSync('README.md', {encoding: 'utf8'});
-//     ral.question('README was already found, do you want to overwrite it? ', answer =>{
-//         if(answer == "yes" || "Yes" || "Y" || "y"){
-//             console.log("Okay overwriting README.md");
-//             userInput();
-//         }else if(answer == "no" || "No" || "N" || "n"){
-//             console.log("Okay closing console...");
-//             rl.close();
-//             return;  
-//         }
-//     })  
-// }catch{
-//     console.log("creating README.md")
-//     userInput()
-// }
-
-
-
-// function userInput(){
-//     rl.question('do you want to use the default template?', answer =>{
-//         if(answer == "yes"){
-//             dataColecter();
-//         }else{
-//             rl.question(`the options are name (1), Description()`, answer =>{
-//                 dataColecter();
-//             })
-//         }
-//     });
-//     function dataColecter(){
-//         rl.question(questions[count], answer =>{
-//             if(count < questions.length){
-//                 count++;
-//                 answers.push(answer);
-//                 dataColecter()
-//             }else{
-//                 rl.close();
-//                 console.log(answers);
-//                 formater()
-//             }
-//         })
-//     }
-// }
-
-// function formater(){
-
-    // var title = (title, description, option) =>{
-    //     return(
-    //     `# ${title}
-    //     \n${description}\n`);
-    // }
-    // var demo = (demo, options) => {
-    //     return(`## Demo \n${demo}`)
-    // }
-    // var installation = (installation, option) =>{
-    //     return(
-    //     `## Installation \n\`\`\`bash
-    //     ${installation}\n\`\`\`\n`);
-    // }
-    // var runLocally = (code, options) =>{
-    //     return(
-    //         ``
-    //     )
-    // }
-    // var deployment = (deployment, options) =>{
-    //     return(
-    //         `## Deployment \n\`\`\`bash
-    //         ${deployment}\n\`\`\`\n`
-    //     )
-    // }
-    // var screenshot = (path, options) => {
-    //     return(
-    //         `## Screenshots 
-    //     \n${path.forEach(element => {
-    //         return `![App Screenshot](${element})\n`
-    //     })})`
-    //     )
-    // }
-    // var documentation = (doc, link, option) =>{
-    //     return(
-    //         `[${doc}](${link})`
-    //     )
-    // }
-
-    // let data = title(answers[0], answers[1]) + screenshot() + installation(answers[2]) + deployment(answers[3]) + documentation();
-
-//     console.log(data);
-//     fs.writeFileSync('README.md', data);
-// }
-

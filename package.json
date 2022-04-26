@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/jamesthomasbester/DyanamicReadmeGenerator#readme",
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "inquirer": "^8.2.2",
+    "prompt": "^1.3.0"
   }
 }
