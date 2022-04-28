@@ -1,20 +1,19 @@
 # Dynamic README.md Generator
-            
-A javascript file that you can add to your repos. That allows you to create a README.md file, a basic layout that allows you to add key information. \n hopefully in the future i can add an option to save templates. 
+                
+A script that you can add to your repo to quickly make a README.md, you can run the script from this environment or your own environment dependencies are fs,inquirer
 ## Screenshots 
-            
+                
 ![App Screenshot](readme.png)
-## Demo 
-n/a## Installation 
+undefined## Installation 
 ```bash
-            npm init -Y
+                npm i
 ```
 ## Documentation 
                 
-[doc](https://www.makeareadme.com/)
+[https://readme.so/](https://readme.so/)
 ## Features 
                 
-console based, no gui needed 
+na 
 ## Deployment 
 ```bash
                 node script.js

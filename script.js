@@ -152,61 +152,91 @@ const main = {
         loop();
     },
     custom: () => {
-        console.log(`\n 
-            | listed below are the questions and the order           | `)
-        questions.forEach(element =>{
-            console.log(` 
-            ${element.trim()}`)
-        })
-        rl.question(`
-            | Return the order that you want the README.md           |
-            | (e.g: 1,2,5,7,3,4) leave out numbers you dont want     |\n`, answer =>{
-                formater(answer.split(','));
-            })
+        // TODO add custom code
     },
     formater: (order) => {
         var title = (title, description, option) =>{
-            return(
-            `# ${title}
-            \n${description}\n`);
+            if(demo =="na" ){
+                return
+            }else{
+                return(
+                `# ${title}
+                \n${description}\n`);
+            }
+
         }
         var demo = (demo, options) => {
-            return(`## Demo \n${demo}`)
+            if(demo =="na" ){
+                return
+            }else{
+                return(`## Demo \n${demo}`)
+            }
+            
         }
         var installation = (installation, option) =>{
-            return(
-            `## Installation \n\`\`\`bash
-            ${installation}\n\`\`\`\n`);
+            if(demo =="na" ){
+                return
+            }else{
+                return(
+                `## Installation \n\`\`\`bash
+                ${installation}\n\`\`\`\n`);
+            }
+
         }
         var features = (input, options) =>{
-            return(
+            if(demo =="na" ){
+                return
+            }else{
+                return(
                 `## Features 
                 \n${input} \n`
             )
+            }
+
         }
         var deployment = (input, options) =>{
-            return(
+            if(demo =="na" ){
+                return
+            }else{
+                return(
                 `## Deployment \n\`\`\`bash
                 ${input}\n\`\`\`\n`
             )
+            }
+
         }
         var screenshot = (path, options) => {
-            return(
+            if(demo =="na" ){
+                return
+            }else{
+                return(
                 `## Screenshots 
-            \n![App Screenshot](${path})\n`
+                \n![App Screenshot](${path})\n`
             )
+            }
+
         }
-        var documentation = (link, option) =>{
-            return(
+        var documentation = (link, name, option) =>{
+            if(demo =="na" ){
+                return
+            }else{
+                return(
                 `## Documentation 
-                \n[doc](${link})\n`
+                \n[${link}](${link})\n`
             )
+            }
+
         }
         var feedback = (input) =>{
-            return(
+            if(demo =="na" ){
+                return
+            }else{
+                return(
                 `## Feedback 
                 \n${input}`
             )
+            }
+
         }
         template = title(format[0], format[1]) + screenshot(format[2])
          + demo(format[3]) + installation(format[4]) + documentation(format[5]) 
