@@ -17,17 +17,49 @@ class ReadMe{
     }
 
     FileBuilder(){
-        this.title = `# ${this.title}`;
-        this.screenshot = this.screenshot.map( element => `![App Screenshot](${element})`);
-        this.ToC = this.ToC.map( (element, index) => `${index} - ${element}`);
+        this.title = `# ${this.title}\n`;
+        this.screenshot = this.screenshot.map( element => `![App Screenshot](${element})\n`);
+        this.ToC = this.ToC.map( (element, index) => `\n${index} - ${element}\n`);
+        this.ToC.unshift('\n## Table of Contents\n');
         this.installation = this.installation.map((element, index) => {
             if(index % 2 == 0){
-                return ` ${element}`
+                return ` ${element}\n`
             }else {
                 return ` \`\`\`bash  \n${element} `
             }
         })
-        
+        this.installation.unshift('## Installation\n');
+        this.usage = this.usage.map((element, index) => {
+            if(index % 2 == 0){
+                return `${element}\n`
+            }else {
+                return `\`\`\`bash  \n${element} `
+            }
+        })
+        this.usage.unshift('## Usage\n');
+        this.license = this.license.map((element, index) => {
+            if(index % 2 == 0){
+                return `(${element}) \n`
+            }else {
+                return `[${element}]\n`
+            }
+        })
+        this.license.unshift('## Licensing\n');
+        this.contributing = this.contributing.map((element => { `${element}\n`}));
+        this.contributing.unshift('## Contributing\n');
+        this.tests = this.tests.map((element, index) => {
+            if(index % 2 == 0){
+                return `${element}\n`
+            }else {
+                return `\`\`\`bash  \n${element}`
+            }
+        });
+        this.tests.unshift('## Tests\n');
+        this.questions.unshift('## Questions\n');
+
+        let fileContent = this.title.toString() + this.description.toString() + this.screenshot.toString() + this.ToC.toString() + this.installation.toString() + this.usage.toString() + this.licence.toString() + this.contributing.toString() + this.tests.toString() + this.questions.toString()
+
+        fs.writeFile('README.md', fileContent)
     }
 }
 
@@ -38,10 +70,10 @@ const questions = [
     `Table of Contents split by a commar ',':`,
     `Installation description then bash install command seperated by commar ',':`,
     `Usage language then command seperated by commar ',':`,
-    `Licensing for the project if multiple split by commar ',':`,
-    `State if you are open to contributions and what your requirements are for accepting them:`,
-    `Any documentation regarding tests split by commar:`,
-    `Where to dirrect any questions or feedback:`
+    `Licensing for the project split license name then link by commar',':`,
+    `State if you are open to contributions and what your requirements are for accepting them if multiple split by commar:`,
+    `Any documentation regarding tests description then command split by commar:`,
+    `Where to dirrect any questions or feedback add the email seperately via commar:`
 
 ];
 
