@@ -34,7 +34,7 @@ const questions = [
     `Link to a live demo of the project: `,
     `Bash command to install project:`,
     `Any documentation name and link split by commar:`,
-    ` Any features that you want to highlight`,
+    `Any features that you want to highlight:`,
     `Deployment (terminal syntax used):`,
     `Where should any feedback be directed:`,
     `Any Acknowledgements name and link split by commar:`
@@ -139,11 +139,6 @@ const main = {
                     format.push(answer.question);
                     loop();
                 })
-                // rl.question(questions[count], answer => {
-                //     count++;
-                //     format.push(answer);
-                //     loop();
-                // })
             }else{
                 main.formater();
                 main.writer(template)
