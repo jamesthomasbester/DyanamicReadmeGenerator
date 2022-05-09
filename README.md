@@ -1,29 +1,31 @@
-# Dynamic README Generator
-A javascript console script that generates a readme.md file based on a standard layout and user input![App Screenshot](readme.png)
+# Dynamic README.md Generator
+A javascript application that generates a readme.md file for you git repos. using a pre-defined template and user input using inquirer.
+![App Screenshot](readme.md)
 
 ## Table of Contents
-,
-0 - installation
-,
-1 - usageeeeeeeeeee
-,
-2 - license
-,
-3 - contributing
-,
-4 - tests
-,
-5 - questions
+|index|Table Of Context|
+|1|isntallation|
+|2|Usage|
+|3|Licensing|
+|4|contributing|
+|5|tests|
+|6|questions|
+
 ## Installation
-, to install environment. Clone repo from github. open a terminal from inside the path
-, ```bash  
- npm i 
- ## Usage
-,to run the script open a terminal from inside the path
-,```bash  
-node readmegenerator.js undefined
+to install download the files. the dependencies need to be downloaded with the following command
+```bash  
+npm install 
+## Usage
+open terminal inside folder and run
+```bash
+node READMEgenerator.js 
+## Licensing
+(mit)[https://opensource.org/licenses/MIT]
+
 ## Contributing
-,## Tests
-,n/a
+
+## Tests
+n/a
+
 ## Questions
-,jamesthomasbester@gmail.com
+jamesthomasbester@gmail.com

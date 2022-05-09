@@ -19,8 +19,7 @@ class ReadMe{
     FileBuilder(){
         this.title = `# ${this.title}\n`;
         this.screenshot = this.screenshot.map( element => `\n![App Screenshot](${element})\n`);
-        this.ToC = this.ToC.map( (element, index) => `\n${index} - ${element}\n`);
-        this.ToC.unshift('\n## Table of Contents\n');
+        this.ToC = ('\n## Table of Contents\n|index|Table Of Context|\n|1|isntallation|\n|2|Usage|\n|3|Licensing|\n|4|contributing|\n|5|tests|\n|6|questions|\n');
         this.installation = this.installation.map((element, index) => {
             if(index % 2 == 0){
                 return ` ${element}\n`
@@ -28,38 +27,38 @@ class ReadMe{
                 return ` \`\`\`bash  \n${element} `
             }
         })
-        this.installation.unshift('## Installation\n');
+        this.installation.unshift('\n## Installation\n');
         this.usage = this.usage.map((element, index) => {
             if(index % 2 == 0){
-                return `${element}\n`
+                return `\n${element}\n`
             }else {
-                return `\`\`\`bash  \n${element} `
+                return `\n\`\`\`bash  \n${element} `
             }
         })
-        this.usage.unshift('## Usage\n');
+        this.usage.unshift('\n## Usage\n');
         this.license = this.license.map((element, index) => {
             if(index % 2 == 0){
-                return `(${element}) \n`
+                return `(${element})`
             }else {
                 return `[${element}]\n`
             }
         })
-        this.license.unshift('## Licensing\n');
+        this.license.unshift('\n## Licensing\n');
         this.contributing = this.contributing.map((element => { `${element}\n`}));
         this.contributing.unshift('\n## Contributing\n');
         this.tests = this.tests.map((element, index) => {
             if(index % 2 == 0){
                 return `${element}\n`
             }else {
-                return `\`\`\`bash  \n${element}`
+                return `\n\`\`\`bash  \n${element}`
             }
         });
-        this.tests.unshift('## Tests\n');
-        this.questions.unshift('## Questions\n');
+        this.tests.unshift('\n## Tests\n');
+        this.questions.unshift('\n## Questions\n');
         let fileContent = "";
 
-        fileContent = this.title + this.description + this.screenshot + this.ToC + this.installation + this.usage + this.license + this.contributing + this.tests + this.questions
-
+        fileContent = this.title + this.description + this.screenshot + this.ToC + this.installation + this.usage + this.license + this.contributing + this.tests + this.questions;
+        fileContent.replace(',', '');
         fs.writeFileSync('README.md', fileContent);
     }
 }
@@ -68,9 +67,9 @@ const questions = [
     `What is the Title of the project: `,
     `A description of thie project:`,
     `Path or url to a screenshot:`,
-    `Table of Contents split by a commar ',':`,
+    `Table of Contents yes or no':`,
     `Installation description then bash install command seperated by commar ',':`,
-    `Usage language then command seperated by commar ',':`,
+    `Usage description then command seperated by commar ',':`,
     `Licensing for the project split license name then link by commar',':`,
     `State if you are open to contributions and what your requirements are for accepting them if multiple split by commar:`,
     `Any documentation regarding tests description then command split by commar:`,
@@ -122,7 +121,7 @@ function input(){
                         document.screenshot = answer.question.split(',');
                         break;
                     case 3:
-                        document.ToC = answer.question.split(',');
+                        document.ToC = answer.question;
                         break;
                     case 4:
                         document.installation = answer.question.split(',');
