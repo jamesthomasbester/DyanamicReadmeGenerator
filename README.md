@@ -3,23 +3,24 @@ A javascript application that generates a readme.md file for you git repos. usin
 ![App Screenshot](readme.png)
 
 ## Table of Contents
-|-----|----------------|
-|index|Table Of Context|
-|1|isntallation|
-|2|Usage|
-|3|Licensing|
-|4|contributing|
-|5|tests|
-|6|questions|
-
+[Installation](#Installation)
+[Usage](#Usage)
+[licensing](#licensing)
+[contributing](#contributing)
+[tests](#tests)
+[questions](#questions)
 ## Installation
 , to install download the files. the dependencies need to be downloaded with the following command
 , ```bash  
-npm install``` 
+npm install
+``` 
 ## Usage
 ,
-open source for all to use
-
+open terminal inside folder and run
+,
+```bash  
+node READMEgenerator.js
+``` 
 ## Licensing
 ,(mit),[https://opensource.org/licenses/MIT]
 
