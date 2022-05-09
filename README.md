@@ -1,23 +1,27 @@
-# Dynamic README.md Generator
-                
-A script that you can add to your repo to quickly make a README.md, you can run the script from this environment or your own environment dependencies are fs,inquirer
-## Screenshots 
-                
-![App Screenshot](readme.png)
-undefined## Installation 
-```bash
-                npm i
-```
-## Documentation 
-                
-[https://readme.so/](https://readme.so/)
-## Features 
-                
-na 
-## Deployment 
-```bash
-                node script.js
-```
-## Feedback 
-                
-jamesthomasbester@gmail.com
+# Dynamic README Generator
+A javascript console script that generates a readme.md file based on a standard layout and user input![App Screenshot](readme.png)
+
+## Table of Contents
+,
+0 - installation
+,
+1 - usageeeeeeeeeee
+,
+2 - license
+,
+3 - contributing
+,
+4 - tests
+,
+5 - questions
+## Installation
+, to install environment. Clone repo from github. open a terminal from inside the path
+, ```bash  
+ npm i ## Usage
+,to run the script open a terminal from inside the path
+,```bash  
+node readmegenerator.js undefined## Contributing
+,## Tests
+,n/a
+## Questions
+,jamesthomasbester@gmail.com

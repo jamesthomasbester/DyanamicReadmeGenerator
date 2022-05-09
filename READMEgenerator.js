@@ -18,7 +18,7 @@ class ReadMe{
 
     FileBuilder(){
         this.title = `# ${this.title}\n`;
-        this.screenshot = this.screenshot.map( element => `![App Screenshot](${element})\n`);
+        this.screenshot = this.screenshot.map( element => `\n![App Screenshot](${element})\n`);
         this.ToC = this.ToC.map( (element, index) => `\n${index} - ${element}\n`);
         this.ToC.unshift('\n## Table of Contents\n');
         this.installation = this.installation.map((element, index) => {
@@ -46,7 +46,7 @@ class ReadMe{
         })
         this.license.unshift('## Licensing\n');
         this.contributing = this.contributing.map((element => { `${element}\n`}));
-        this.contributing.unshift('## Contributing\n');
+        this.contributing.unshift('\n## Contributing\n');
         this.tests = this.tests.map((element, index) => {
             if(index % 2 == 0){
                 return `${element}\n`
@@ -56,10 +56,11 @@ class ReadMe{
         });
         this.tests.unshift('## Tests\n');
         this.questions.unshift('## Questions\n');
+        let fileContent = "";
 
-        let fileContent = this.title.toString() + this.description.toString() + this.screenshot.toString() + this.ToC.toString() + this.installation.toString() + this.usage.toString() + this.licence.toString() + this.contributing.toString() + this.tests.toString() + this.questions.toString()
+        fileContent = this.title + this.description + this.screenshot + this.ToC + this.installation + this.usage + this.license + this.contributing + this.tests + this.questions
 
-        fs.writeFile('README.md', fileContent)
+        fs.writeFileSync('README.md', fileContent);
     }
 }
 

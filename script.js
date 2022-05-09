@@ -1,32 +1,13 @@
+//my imports to read file and to take user input
 const fs = require('fs');
-const readline = require('readline');
 const inquirer = require('inquirer');
-const { writer } = require('repl');
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-const answers = {
-    title: '1',
-    description: '2',
-    screenshot: '',
-    demo: '',
-    installation: '',
-    documentation: '',
-    features: '',
-    deployment: '',
-    Feedback: '',
-    acknowledgements: '',
-
-};
-
+//empty array
 const format = [
 
 ];
-
+// string that will use later
 var template;
-
+//array of questions
 const questions = [
     `What is the Title of the project: `,
     `A description of thie project:`,
@@ -34,13 +15,14 @@ const questions = [
     `Link to a live demo of the project: `,
     `Bash command to install project:`,
     `Any documentation name and link split by commar:`,
-    `Any features that you want to highlight:`,
+    ` Any features that you want to highlight`,
     `Deployment (terminal syntax used):`,
     `Where should any feedback be directed:`,
     `Any Acknowledgements name and link split by commar:`
 ];
-
+//decided to make an object it as an object to clean up code, and for potentional future use
 const main = {
+    //initial input using inquirer to give multiple console options
     init: () => {
         console.log('-------------------README.md Generator-------------------')
         inquirer.prompt([
@@ -64,6 +46,7 @@ const main = {
             }
         })
     },
+    //checking if a readme file already exists with a try / catch
     fileCheck: (option) => {
         try{
             let file = fs.readFileSync('README.md', {encoding: 'utf8'});
@@ -124,6 +107,7 @@ const main = {
             })
         }
     },
+    // looping through the question array and printing to console for each
     premade: () => {
         let count = 0;
         function loop() {
@@ -140,15 +124,18 @@ const main = {
                     loop();
                 })
             }else{
+                // when the loop has reached the length of the array we move to the next function
                 main.formater();
                 main.writer(template)
             }
         }
         loop();
     },
+    // i was going to allow the user to create their own template, didn't have enough time.
     custom: () => {
         // TODO add custom code
     },
+    //formating the input data so .md can read it
     formater: (order) => {
         var title = (title, description, option) =>{
             if(demo =="na" ){
@@ -238,10 +225,12 @@ const main = {
          + features(format[6]) + deployment(format[7]) + feedback(format[8]);
          main.writer(template);
     },
+    //finally writing the infomation given to file.
     writer: (option) => {
         console.log(option)
         fs.writeFileSync('README.md', option);
     }
 }
 
+//calling the main function to start it all
 main.init()
