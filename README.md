@@ -17,10 +17,12 @@ A javascript console script that generates a readme.md file based on a standard 
 ## Installation
 , to install environment. Clone repo from github. open a terminal from inside the path
 , ```bash  
- npm i ## Usage
+ npm i 
+ ## Usage
 ,to run the script open a terminal from inside the path
 ,```bash  
-node readmegenerator.js undefined## Contributing
+node readmegenerator.js undefined
+## Contributing
 ,## Tests
 ,n/a
 ## Questions
