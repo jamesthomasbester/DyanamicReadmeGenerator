@@ -29,7 +29,7 @@ class ReadMe{
             if(index % 2 == 0){
                 return ` ${element}\n`
             }else {
-                return ` \`\`\`bash  \n${element}\n\`\`\` `
+                return `\n\`\`\`bash  \n${element}\n\`\`\` `
             }
         })
         this.installation.unshift('\n## Installation\n');
