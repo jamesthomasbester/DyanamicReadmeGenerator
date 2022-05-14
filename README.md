@@ -1,6 +1,6 @@
 # Dynamic Readme.md Generator
 A command line javascript script that asks the user for information regarding their project/repo and then formats that data into a readme.md file, that the user can then move into the repo
-![App Screenshot](readme.md)
+![App Screenshot](readme.png)
 
 ## Table of Contents
 [Installation](#Installation)
