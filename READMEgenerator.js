@@ -19,7 +19,12 @@ class ReadMe{
     FileBuilder(){
         this.title = `# ${this.title}\n`;
         this.screenshot = this.screenshot.map( element => `\n![App Screenshot](${element})\n`);
-        this.ToC = ('\n## Table of Contents\n[Installation](#Installation)\n[Usage](#Usage)\n[licensing](#licensing)\n[contributing](#contributing)\n[tests](#tests)\n[questions](#questions)');
+        if(this.ToC == 'yes'){
+            this.ToC = ('\n## Table of Contents\n[Installation](#Installation)\n[Usage](#Usage)\n[licensing](#licensing)\n[contributing](#contributing)\n[tests](#tests)\n[questions](#questions)');
+        }else{
+            this.ToC = `\n`
+        }
+        
         this.installation = this.installation.map((element, index) => {
             if(index % 2 == 0){
                 return ` ${element}\n`
@@ -58,7 +63,7 @@ class ReadMe{
 
         fileContent = this.title + this.description + this.screenshot + this.ToC + this.installation + this.usage + this.license + this.contributing + this.tests + this.questions;
         fileContent.toString().replace(',', '');
-        console.log(fileContent.toString().replace(',', ''));
+        console.log(fileContent.toString().replace(',', ' '));
         fs.writeFileSync('README.md', fileContent);
     }
 }
