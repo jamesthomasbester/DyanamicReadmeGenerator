@@ -22,6 +22,11 @@ after installation which will download dependencies run
 ```bash  
 node readmegenerator.js
 ``` 
+
+
+https://user-images.githubusercontent.com/46641259/168408110-9847ae3e-d275-4aa4-82bc-b022b044db22.mp4
+
+
 ## Licensing
 ,(MIT),[https://opensource.org/licenses/MIT]
 
