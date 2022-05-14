@@ -1,7 +1,7 @@
+// dependencies
 const inquirer = require('inquirer');
 const fs = require('fs');
-
-
+//A class to keep all the data consistant
 class ReadMe{
     constructor({title, description, screenshot, ToC, installation, usage, license, contributing, tests, questions}){
         this.title = title;
@@ -15,7 +15,7 @@ class ReadMe{
         this.tests = tests;
         this.questions = questions;
     }
-
+    //formating the data from the questions into a format the we can use with .md
     FileBuilder(){
         this.title = `# ${this.title}\n`;
         this.screenshot = this.screenshot.map( element => `\n![App Screenshot](${element})\n`);
@@ -61,13 +61,14 @@ class ReadMe{
         this.questions.unshift('\n## Questions\n');
         let fileContent = "";
 
+        //joing all the strings
         fileContent = this.title + this.description + this.screenshot + this.ToC + this.installation + this.usage + this.license + this.contributing + this.tests + this.questions;
         fileContent.toString().replace(',', '');
-        console.log(fileContent.toString().replace(',', ' '));
+        //writing data to file
         fs.writeFileSync('README.md', fileContent);
     }
 }
-
+//an array with all the questions
 const questions = [
     `What is the Title of the project: `,
     `A description of thie project:`,
@@ -107,6 +108,7 @@ function input(){
     })
     let count = 0;
     function askQuesions(){
+        //asking the questions using count as the index of the question array to ask
         if(count < questions.length){
             inquirer.prompt([
                 {
@@ -115,6 +117,7 @@ function input(){
                 }
             ])
             .then( answer =>{
+                //based on the index we are selecting which case to use to save data
                 switch(count){
                     case 0:
                         document.title = answer.question;
@@ -148,18 +151,16 @@ function input(){
                         break;
                 }
                 count++;
+                //looping back the start of the function to ask next question
                 askQuesions()
             })
         }else{
             console.log(document);
+            //when count is equal to the question array length we move onto formatting the data.
             document.FileBuilder();
             console.log(document)
-            
-        }
-        
+        }  
     }
-    
-    
 }
-
+//starting the script by calling the main function
 input();
